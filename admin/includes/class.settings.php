@@ -38,14 +38,14 @@ class if_settings_api_wrap {
     }
 
 	function sub_menu_page() {
-		add_submenu_page( 'options-general.php', 'PrimeTime WP SSO Settings', __('WP SSO Settings','pt-wp-discourse-sso'), 'manage_options', 'wp-sso-settings', array($this,'submenu_page_callback') );
+		add_submenu_page( 'options-general.php', 'PrimeTime WP + Discourse SSO Settings', __('WP Discourse SSO','pt-wp-discourse-sso'), 'manage_options', 'wp-sso-settings', array($this,'submenu_page_callback') );
 	}
 
 
 	function submenu_page_callback() {
 
 		echo '<div class="wrap">';
-			?><h2><?php _e('PrimTime WP SSO Settings','idea-factory');?></h2><?php
+			?><h2><?php _e('PrimeTime WP + Discourse SSO Settings','idea-factory');?></h2><?php
 
 			$this->settings_api->show_navigation();
         	$this->settings_api->show_forms();
@@ -58,7 +58,7 @@ class if_settings_api_wrap {
         $sections = array(
             array(
                 'id' 	=> 'pt_wp_sso_settings',
-                'title' => 'Setup'
+                'title' => 'Discourse Settings'
             )
         );
         return $sections;
@@ -71,15 +71,15 @@ class if_settings_api_wrap {
             	array(
                     'name' 				=> 'secret_key',
                     'label' 			=> 'Secret Key',
-                    'desc' 				=> '',
+                    'desc' 				=> 'Same secret key you set in the Discourse settings.',
                     'type' 				=> 'text',
                     'default' 			=> '',
                     'sanitize_callback' => 'sanitize_text_field'
                 ),
                  array(
-                    'name' 				=> 'callback_url',
-                    'label' 			=> 'Callback URL',
-                    'desc' 				=> '',
+                    'name' 				=> 'discourse_url',
+                    'label' 			=> 'Discourse URL',
+                    'desc' 				=> 'The base URL to your Discourse installation (no trailing slash)',
                     'type' 				=> 'text',
                     'default' 			=> '',
                     'sanitize_callback' => 'sanitize_text_field'

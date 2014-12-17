@@ -1,14 +1,14 @@
-=== @TODO: Plugin Name ===
-Contributors: (this should be a list of wordpress.org userids)
-Donate link: http://example.com/
-Tags: comments, spam
-Requires at least: 3.5.1
+=== PrimeTime WordPress + Discourse SSO ===
+Contributors: etcio, nphaskins
+Donate link: https://primetimecode.com
+Tags: discourse, forum, sso
+Requires at least: 3.6
 Tested up to: 3.6
 Stable tag: 0.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Here is a short description of the plugin.  This should be no more than 150 characters.  No markup here.
+This plugin provides single sign-on capabilities for Discourse using WordPress user authentication.
 
 == Description ==
 

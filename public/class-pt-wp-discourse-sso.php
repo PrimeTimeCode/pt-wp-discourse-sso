@@ -63,6 +63,7 @@ class WP_Discourse_SSO {
 		add_action( 'wpmu_new_blog', array( $this, 'activate_new_site' ) );
 
 		require_once(PT_WP_DISCOURSE_SSO_DIR.'/public/includes/helpers.php');
+		require_once(PT_WP_DISCOURSE_SSO_DIR.'/public/includes/template-loader.php');
 	}
 
 	/**
@@ -226,6 +227,58 @@ class WP_Discourse_SSO {
 	 */
 	private static function single_deactivate() {
 		// @TODO: Define deactivation functionality here
+	}
+
+	/**
+	 * Validate the SSO payload
+	 * @param  [type] $payload [description]
+	 * @param  [type] $sig     [description]
+	 * @return [type]          [description]
+	 */
+	public function validate($payload, $sig) {
+		$payload = urldecode($payload);
+		if(hash_hmac("sha256", $payload, $this->sso_secret) === $sig) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	/**
+	 * Get nonce out of original payload
+	 * @param  [type] $payload [description]
+	 * @return [type]          [description]
+	 */
+	public function getNonce($payload) {
+		$payload = urldecode($payload);
+		$query = array();
+		parse_str(base64_decode($payload), $query);
+		if(isset($query["nonce"])) {
+			return $query["nonce"];
+		} else {
+			throw new Exception("Nonce not found in payload!");
+		}
+	}
+	
+	/**
+	 * Create a login string to authenticate with Discourse
+	 * @param  [type] $params [description]
+	 * @return [type]         [description]
+	 */
+	public function buildLoginString($params) {
+		if(!isset($params["external_id"])) {
+			throw new Exception("Missing required parameter 'external_id'");
+		}
+		if(!isset($params["nonce"])) {
+			throw new Exception("Missing required parameter 'nonce'");
+		}
+		if(!isset($params["email"])) {
+			throw new Exception("Missing required parameter 'email'");
+		}
+		$payload = base64_encode(http_build_query($params));
+		$sig = hash_hmac("sha256", $payload, $this->sso_secret);
+		
+		return http_build_query(array("sso" => $payload, "sig" => $sig));
 	}
 
 }
