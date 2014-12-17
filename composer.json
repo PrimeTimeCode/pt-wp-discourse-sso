@@ -1,0 +1,9 @@
+{
+   "name": "primetimecode/pt-wp-discourse-sso",
+   "type": "wordpress-plugin",
+   "description": "PrimeTime Code WP + Discourse SSO",
+   "keywords": ["plugin","wordpress","primetime","discourse","forum","sso"],
+   "require": {
+     "composer/installers": "~1.0.6"
+   }
+}

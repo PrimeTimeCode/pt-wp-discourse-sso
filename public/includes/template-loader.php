@@ -1,4 +1,4 @@
-<?
+<?php
 
 class PT_Template_Loader {
 
@@ -97,8 +97,6 @@ class PT_Template_Loader {
                 // Add the modified cache to allow WordPress to pick it up for listing
                 // available templates
                 wp_cache_add( $cache_key, $templates, 'themes', 1800 );
-
-                var_dump($templates);
 
                 return $atts;
 
