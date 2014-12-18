@@ -21,7 +21,7 @@ class WP_Discourse_SSO {
 
 	public $configured = FALSE;
 	private $sso_secret;
-	private $discourse_url;
+	public $discourse_url;
 
 	/**
 	 * Plugin version, used for cache-busting of style and script file references.

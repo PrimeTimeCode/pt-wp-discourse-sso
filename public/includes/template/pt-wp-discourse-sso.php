@@ -90,7 +90,7 @@ else {
 	$q = $sso->buildLoginString( $params );
 
 	// Redirect back to Discourse
-	wp_redirect( $discourse_url . '/session/sso_login?' . $q );
+	wp_redirect( $sso->discourse_url . '/session/sso_login?' . $q );
 	exit;
 
 }
