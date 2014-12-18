@@ -15,7 +15,7 @@ Discourse is a fantastic new forum that can add another layer to your WordPress 
 
 Notes:
 
-* 	This plugin requires permalinks to be enabled.
+*   This plugin requires permalinks to be enabled.
 
 Some Features:
 
@@ -24,7 +24,7 @@ Some Features:
 
 Coming Soon:
 
-* 	Only allow access with certain capabilities or roles.
+*   Only allow access with certain capabilities or roles.
 
 == Installation ==
 
