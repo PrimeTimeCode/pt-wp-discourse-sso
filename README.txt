@@ -71,6 +71,11 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 (or jpg, jpeg, gif).
 2. This is the second screen shot
 
+== Credits ==
+
+* Template adapted from Adam Capirola : https://gist.github.com/adamcapriola/11300529
+* SSO methods adapted from ArmedGuy : https://github.com/ArmedGuy/discourse_sso_php
+
 == Changelog ==
 
 = 0.1 =

@@ -4,8 +4,8 @@
  * @package   WP_Discourse_SSO
  * @author    ET Cook <e@etc.io>
  * @license   GPL-2.0+
- * @link      http://example.com
- * @copyright 2014 Your Name or Company Name
+ * @link      http://primetimecode.com
+ * @copyright 2014 PrimeTimeCode
  *
  * Plugin Name:       PrimeTime WP Discourse SSO
  * Plugin URI:        http://etc.io
