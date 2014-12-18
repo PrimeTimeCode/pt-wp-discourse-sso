@@ -18,10 +18,10 @@ if ( ! $sso->configured ) {
 
 }
 
-if ( ! isset( $_GET['sso'] ) ) {
+if ( ! isset( $_GET['sso'] ) && ! isset( $_GET['sig'] ) ) {
 
 	// Error message
-	echo( 'Invalid request. Missing SSO token.' );
+	echo( 'Invalid request. Missing tokens.' );
 
 	// Terminate
 	exit;
