@@ -14,6 +14,10 @@ This plugin provides single sign-on capabilities for Discourse using WordPress u
 
 Discourse is a fantastic new forum that can add another layer to your WordPress community. This plugin allows you to create a fluid experience by using your WordPress installation as the authentication server, creating a single-sign-on (SSO) for your users!
 
+Notes:
+
+*		This plugin requires permalinks to be enabled.
+
 Some Features:
 
 *   Seamless integration into almost any WordPress installation.
@@ -39,9 +43,9 @@ There are only three steps to configuring your WP + Discourse SSO!
 
 = Using FTP =
 
-1. Download `plugin-name.zip`
-2. Extract the `plugin-name` directory to your computer
-3. Upload the `plugin-name` directory to the `/wp-content/plugins/` directory
+1. Download `pt-wp-discourse-sso.zip`
+2. Extract the `pt-wp-discourse-sso` directory to your computer
+3. Upload the `pt-wp-discourse-sso` directory to the `/wp-content/plugins/` directory
 4. Activate the plugin in the Plugin dashboard
 
 = 2. Configure the plugin =
@@ -51,8 +55,6 @@ Under settings, you'll see the SSO configuration page. Add the url to your Disco
 = 3. Enabling SSO on Discourse =
 
 In your Discourse admin settings, find the settings labeled, enable_sso, sso_url and sso_secret. Enter the URL of the page you created, as well as the secret key, and enable sso.
-
-[PICTURE HERE]
 
 That's it!
 
@@ -65,11 +67,9 @@ https://discourse.org
 
 == Screenshots ==
 
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from
-the /assets directory or the directory that contains the stable readme.txt (tags or trunk). Screenshots in the /assets
-directory take precedence. For example, `/assets/screenshot-1.png` would win over `/tags/4.3/screenshot-1.png`
-(or jpg, jpeg, gif).
-2. This is the second screen shot
+1. The plugin settings screen. Here you enter your secret key as well as the url to your discourse site.
+2. Custom SSO page can be assigned with any theme.
+3. Enjoy single sign on between WP + Discourse. Cool!
 
 == Credits ==
 

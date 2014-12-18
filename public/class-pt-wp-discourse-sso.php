@@ -87,6 +87,16 @@ class WP_Discourse_SSO {
 
 		$assigned_template = PT_Template_Loader::get_page_by_template( 'template/pt-wp-discourse-sso.php' );
 
+		if ( ! get_option('permalink_structure') ) {
+			add_action( 'admin_notices', function() {
+    		?>
+		    <div class="error">
+		        <p>WP + Discourse SSO requires permalinks to be enabled.</p>
+		    </div>
+		    <?php
+			});
+		}
+
 		if ( ! $this->configured ) {
 			add_action( 'admin_notices', function() {
     		?>
