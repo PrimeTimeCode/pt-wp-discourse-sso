@@ -7,9 +7,25 @@
  *
  */
 
-// Customize these two variables
-$sso_secret = 'cqaPXfh,jDP76&';
-$discourse_url = 'http://community.cgcookie.com'; // Note: No trailing slash!
+$sso = WP_Discourse_SSO::get_instance();
+if ( ! $sso->configured ) {
+
+	// Error message
+	echo( 'This plugin has not been configured yet.' );
+
+	// Terminate
+	exit;
+
+}
+
+if ( ! isset( $_GET['sso'] ) ) {
+
+	// Error message
+	echo( 'Invalid request. Missing SSO token.' );
+
+	// Terminate
+	exit;
+}
 
 // Not logged in to WordPress, redirect to WordPress login page with redirect back to here
 if ( ! is_user_logged_in() ) {
@@ -33,25 +49,16 @@ if ( ! is_user_logged_in() ) {
 else {
 
 	// Payload and signature
-	$payload = $_GET['sso'];
-	$sig = $_GET['sig'];
+	if ( isset($_GET['sso'] ) ) {
+		$payload = $_GET['sso'];
+	}
+
+	if ( isset($_GET['sig'] ) ) {
+		$sig = $_GET['sig'];
+	}
 
 	// Change %0B back to %0A
 	$payload = urldecode( str_replace( '%0B', '%0A', urlencode( $payload ) ) );
-	
-	// Check for helper class
-	if ( ! class_exists( 'Discourse_SSO' ) ) {
-
-		// Error message
-		echo( 'Helper class is not properly included.' );
-
-		// Terminate
-		exit;
-
-	}
-
-	// Validate signature
-	$sso = new Discourse_SSO( $sso_secret );
 
 	if ( ! ( $sso->validate( $payload, $sig ) ) ) {
 		

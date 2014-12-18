@@ -19,6 +19,10 @@
  */
 class WP_Discourse_SSO {
 
+	public $configured = FALSE;
+	private $sso_secret;
+	private $discourse_url;
+
 	/**
 	 * Plugin version, used for cache-busting of style and script file references.
 	 *
@@ -64,6 +68,14 @@ class WP_Discourse_SSO {
 
 		require_once(PT_WP_DISCOURSE_SSO_DIR.'/public/includes/helpers.php');
 		require_once(PT_WP_DISCOURSE_SSO_DIR.'/public/includes/template-loader.php');
+
+		// Make sure the plugin is configured
+		if ( NULL != pt_wp_sso_get_option('secret_key','pt_wp_sso_settings') && NULL != pt_wp_sso_get_option('discourse_url','pt_wp_sso_settings') ) {
+			$this->configured = TRUE;
+			$this->sso_secret = pt_wp_sso_get_option('secret_key','pt_wp_sso_settings');
+			$this->discourse_url = pt_wp_sso_get_option('discourse_url','pt_wp_sso_settings');
+		}
+
 	}
 
 	/**
@@ -236,6 +248,7 @@ class WP_Discourse_SSO {
 	 * @return [type]          [description]
 	 */
 	public function validate($payload, $sig) {
+
 		$payload = urldecode($payload);
 		if(hash_hmac("sha256", $payload, $this->sso_secret) === $sig) {
 			return true;
