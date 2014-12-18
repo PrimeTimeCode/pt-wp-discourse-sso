@@ -131,5 +131,22 @@ class PT_Template_Loader {
 
         } 
 
+        /**
+         * Pull the first WP_Post object that is assigned t
+         * @param  string $template template name to search for
+         * @return object Object of class WP_Post
+         */
+        public static function get_page_by_template( $template ) {
+
+            $query = new WP_Query( array( 'meta_key' => '_wp_page_template', 'meta_value' => $template, 'posts_per_page' => 1, 'post_type' => 'page' ) );
+
+            if ( $query->have_posts() ) {
+                return $query->posts[0];
+            }
+
+            return FALSE;
+
+        }
+
 
 }

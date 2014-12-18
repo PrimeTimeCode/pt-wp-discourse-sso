@@ -22,6 +22,7 @@ class WP_Discourse_SSO {
 	public $configured = FALSE;
 	private $sso_secret;
 	public $discourse_url;
+	public $admin_url;
 
 	/**
 	 * Plugin version, used for cache-busting of style and script file references.
@@ -69,11 +70,41 @@ class WP_Discourse_SSO {
 		require_once(PT_WP_DISCOURSE_SSO_DIR.'/public/includes/helpers.php');
 		require_once(PT_WP_DISCOURSE_SSO_DIR.'/public/includes/template-loader.php');
 
+		$this->check_configuration();
+
+		$this->admin_url = admin_url('options-general.php?page=wp-sso-settings');
+
+	}
+
+	private function check_configuration() {
+
 		// Make sure the plugin is configured
 		if ( NULL != pt_wp_sso_get_option('secret_key','pt_wp_sso_settings') && NULL != pt_wp_sso_get_option('discourse_url','pt_wp_sso_settings') ) {
 			$this->configured = TRUE;
 			$this->sso_secret = pt_wp_sso_get_option('secret_key','pt_wp_sso_settings');
 			$this->discourse_url = pt_wp_sso_get_option('discourse_url','pt_wp_sso_settings');
+		}
+
+		$assigned_template = PT_Template_Loader::get_page_by_template( 'template/pt-wp-discourse-sso.php' );
+
+		if ( ! $this->configured ) {
+			add_action( 'admin_notices', function() {
+    		?>
+		    <div class="error">
+		        <p>Click <a href="<?php echo $this->admin_url; ?>">here</a> to configure the WP + Discourse SSO plugins.</p>
+		    </div>
+		    <?php
+			});
+		}
+
+		if ( ! $assigned_template ) {
+			add_action( 'admin_notices', function() {
+    		?>
+		    <div class="error">
+		        <p>You need to create a new page and assign the WP Discourse SSO template to fully configure this plugin!</p>
+		    </div>
+		    <?php
+			});
 		}
 
 	}
