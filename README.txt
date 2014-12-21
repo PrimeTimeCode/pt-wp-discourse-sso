@@ -75,7 +75,7 @@ https://discourse.org
 
 == Credits ==
 
-* Template adapted from Adam Capirola : https://gist.github.com/adamcapriola/11300529
+* Request processing adapted from Adam Capirola : https://gist.github.com/adamcapriola/11300529
 * SSO methods adapted from ArmedGuy : https://github.com/ArmedGuy/discourse_sso_php
 
 == Changelog ==

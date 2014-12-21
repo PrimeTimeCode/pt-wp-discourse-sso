@@ -102,8 +102,6 @@ class WP_Discourse_SSO {
 			$this->configured['all'] = TRUE;
 		}
 
-		ChromePhp::log($this->configured);
-
 		if ( ! $this->configured['all'] ) {
 			add_action( 'admin_notices', function() {
     		?>
