@@ -77,5 +77,8 @@ https://discourse.org
 
 == Changelog ==
 
+= 0.2 =
+* Refactoring away from template based system
+
 = 0.1 =
 * Initial release
