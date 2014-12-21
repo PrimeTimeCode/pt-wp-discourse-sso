@@ -68,11 +68,12 @@ class WP_Discourse_SSO {
 		add_action( 'wpmu_new_blog', array( $this, 'activate_new_site' ) );
 
 		require_once(PT_WP_DISCOURSE_SSO_DIR.'public/includes/helpers.php');
-		require_once(PT_WP_DISCOURSE_SSO_DIR.'public/includes/template-loader.php');
 
 		$this->check_configuration();
 
 		$this->admin_url = admin_url('options-general.php?page=wp-sso-settings');
+
+		add_action( 'init', array( $this, 'interceptSSORequest' ) );
 
 	}
 
@@ -85,7 +86,7 @@ class WP_Discourse_SSO {
 			$this->discourse_url = pt_wp_sso_get_option('discourse_url','pt_wp_sso_settings');
 		}
 
-		$assigned_template = PT_Template_Loader::get_page_by_template( 'template/pt-wp-discourse-sso.php' );
+		//$assigned_template = PT_Template_Loader::get_page_by_template( 'template/pt-wp-discourse-sso.php' );
 
 		if ( ! get_option('permalink_structure') ) {
 			add_action( 'admin_notices', function() {
@@ -102,16 +103,6 @@ class WP_Discourse_SSO {
     		?>
 		    <div class="error">
 		        <p>Click <a href="<?php echo $this->admin_url; ?>">here</a> to configure the WP + Discourse SSO plugins.</p>
-		    </div>
-		    <?php
-			});
-		}
-
-		if ( ! $assigned_template ) {
-			add_action( 'admin_notices', function() {
-    		?>
-		    <div class="error">
-		        <p>You need to create a new page and assign the WP Discourse SSO template to fully configure this plugin!</p>
 		    </div>
 		    <?php
 			});
@@ -333,6 +324,90 @@ class WP_Discourse_SSO {
 		$sig = hash_hmac("sha256", $payload, $this->sso_secret);
 		
 		return http_build_query(array("sso" => $payload, "sig" => $sig));
+	}
+
+	private function cleansePayload($p){
+		return str_replace( '%0A', '%0B', $p );
+	}
+
+	private function restorePayload($p){
+		return urldecode( str_replace( '%0B', '%0A', urlencode( $p ) ) );
+	}
+
+	/**
+	 * Callback function to intercept and validate SSO requests
+	 * @return [type] [description]
+	 */
+	public function interceptSSORequest() {
+
+		if( isset( $_GET['sso'] ) && isset( $_GET['sig'] ) ) {
+
+			$varsso = $_GET['sso'];
+			$varsig = $_GET['sig'];
+
+			if( ! $this->validate( $varsso, $varsig ) ) {
+				//return;
+			}
+			
+			// Check to see whether the user is logged in or not
+			if ( ! is_user_logged_in() ) {
+
+				// Preserve sso and sig parameters
+				$redirect = add_query_arg( array( 'sso' => urlencode( $varsso ), 'sig' => urlencode( $varsig ) ) );
+				
+				// Change %0A to %0B so it's not stripped out in wp_sanitize_redirect
+				$redirect = $this->cleansePayload( $redirect );
+
+				// Build login URL
+				$login = wp_login_url( $redirect );
+
+				// Redirect to login
+				wp_redirect( $login );
+				exit;
+
+			}
+
+			// Logged in to WordPress, now try to log in to Discourse with WordPress user information
+			else {
+
+				$ssopayload = $this->restorePayload( $_GET['sso'] );
+				$sigpayload = $_GET['sig'];
+
+				if ( ! ( $this->validate( $ssopayload, $sigpayload ) ) ) {
+					
+					// Error message
+					echo( 'Invalid request.' );
+					
+					// Terminate
+					exit;
+
+				}
+
+				// Nonce    
+				$nonce = $this->getNonce( $ssopayload );
+
+				$current_user = wp_get_current_user();
+
+				// Map information
+				$params = array(
+					'nonce' => $nonce,
+					'name' => $current_user->display_name,
+					'username' => $current_user->user_login,
+					'email' => $current_user->user_email,
+					'about_me' => $current_user->description,
+					'external_id' => $current_user->ID
+				);
+
+				// Build login string
+				$q = $this->buildLoginString( $params );
+
+				// Redirect back to Discourse
+				wp_redirect( $this->discourse_url . '/session/sso_login?' . $q );
+
+				exit;
+
+			}
+		}
 	}
 
 }

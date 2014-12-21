@@ -37,7 +37,6 @@ register_activation_hook( __FILE__, array( 'WP_Discourse_SSO', 'activate' ) );
 register_deactivation_hook( __FILE__, array( 'WP_Discourse_SSO', 'deactivate' ) );
 
 add_action( 'plugins_loaded', array( 'WP_Discourse_SSO', 'get_instance' ) );
-add_action( 'plugins_loaded', array( 'PT_Template_Loader', 'get_instance' ) );
 
 /*----------------------------------------------------------------------------*
  * Dashboard and Administrative Functionality
