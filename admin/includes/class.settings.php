@@ -71,7 +71,7 @@ class pt_wp_discourse_sso_settings_api_wrap {
             	array(
                     'name' 				=> 'secret_key',
                     'label' 			=> 'Secret Key',
-                    'desc' 				=> 'Same secret key you set in the Discourse settings.',
+                    'desc' 				=> 'Random string that will be the same on both your WP and Discourse installation.',
                     'type' 				=> 'text',
                     'default' 			=> '',
                     'sanitize_callback' => 'sanitize_text_field'
@@ -79,7 +79,7 @@ class pt_wp_discourse_sso_settings_api_wrap {
                  array(
                     'name' 				=> 'discourse_url',
                     'label' 			=> 'Discourse URL',
-                    'desc' 				=> 'The base URL to your Discourse installation (no trailing slash)',
+                    'desc' 				=> 'The base URL to your Discourse installation (include protocol)',
                     'type' 				=> 'text',
                     'default' 			=> '',
                     'sanitize_callback' => 'sanitize_text_field'

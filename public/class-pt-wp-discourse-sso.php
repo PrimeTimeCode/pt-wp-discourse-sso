@@ -19,7 +19,7 @@
  */
 class WP_Discourse_SSO {
 
-	public $configured = FALSE;
+	public $configured = array();
 	private $sso_secret;
 	public $discourse_url;
 	public $admin_url;
@@ -31,7 +31,7 @@ class WP_Discourse_SSO {
 	 *
 	 * @var     string
 	 */
-	const VERSION = '0.1';
+	const VERSION = PT_WP_DISCOURSE_SSO_VERSION;
 
 	/**
 	 * Unique identifier
@@ -78,31 +78,44 @@ class WP_Discourse_SSO {
 	}
 
 	private function check_configuration() {
+		$this->configured['all'] = FALSE;
+		$this->configured['secret'] = FALSE;
+		$this->configured['discourse_url'] = FALSE;
+		$this->configured['activated'] = FALSE;
+
+		if ( get_site_option( 'pt_wp_discourse_sso_activated' ) ) {
+			$this->configured['activated'] = TRUE;
+		}
+		
+		if ( NULL != pt_wp_sso_get_option('secret_key','pt_wp_sso_settings') ) {
+			$this->configured['secret'] = TRUE;
+			$this->sso_secret = pt_wp_sso_get_option('secret_key','pt_wp_sso_settings');
+		}
+
+		if ( NULL != pt_wp_sso_get_option('discourse_url','pt_wp_sso_settings') ) {
+			$this->configured['discourse_url'] = TRUE;
+			$this->discourse_url = rtrim(pt_wp_sso_get_option('discourse_url','pt_wp_sso_settings'),'/');
+		}
 
 		// Make sure the plugin is configured
-		if ( NULL != pt_wp_sso_get_option('secret_key','pt_wp_sso_settings') && NULL != pt_wp_sso_get_option('discourse_url','pt_wp_sso_settings') ) {
-			$this->configured = TRUE;
-			$this->sso_secret = pt_wp_sso_get_option('secret_key','pt_wp_sso_settings');
-			$this->discourse_url = pt_wp_sso_get_option('discourse_url','pt_wp_sso_settings');
+		if ( $this->configured['secret'] && $this->configured['discourse_url'] && $this->configured['activated'] ) {
+			$this->configured['all'] = TRUE;
 		}
 
-		//$assigned_template = PT_Template_Loader::get_page_by_template( 'template/pt-wp-discourse-sso.php' );
+		ChromePhp::log($this->configured);
 
-		if ( ! get_option('permalink_structure') ) {
+		if ( ! $this->configured['all'] ) {
 			add_action( 'admin_notices', function() {
     		?>
 		    <div class="error">
-		        <p>WP + Discourse SSO requires permalinks to be enabled.</p>
-		    </div>
-		    <?php
-			});
-		}
-
-		if ( ! $this->configured ) {
-			add_action( 'admin_notices', function() {
-    		?>
-		    <div class="error">
-		        <p>Click <a href="<?php echo $this->admin_url; ?>">here</a> to configure the WP + Discourse SSO plugins.</p>
+					<h4>Setting up your WP + Discourse SSO connection is easy!</h4>
+					<p>
+					<ol>
+						<li><?php echo ($this->configured['secret'] ? '<s>' : ''); ?>Generate or come up with a random string of characters to use as a "key." Enter it in the <a href="<?php echo $this->admin_url; ?>">settings page</a>.<?php echo ($this->configured['secret'] ? '</s>' : ''); ?></li>
+						<li><?php echo ($this->configured['discourse_url'] ? '<s>' : ''); ?>Paste your Discourse URL (http://example.discourse.org) into <a href="<?php echo $this->admin_url; ?>">settings page</a>.<?php echo ($this->configured['discourse_url'] ? '</s>' : ''); ?></li>
+						<li><?php echo ($this->configured['activated'] ? '<s>' : ''); ?>Handle your first authentication. <i>(This message will go away once you'd validated your first SSO request)</i><?php echo ($this->configured['activated'] ? '</s>' : ''); ?></li>
+					</ol>
+					</p>
 		    </div>
 		    <?php
 			});
@@ -283,6 +296,9 @@ class WP_Discourse_SSO {
 
 		$payload = urldecode($payload);
 		if(hash_hmac("sha256", $payload, $this->sso_secret) === $sig) {
+			if( !$this->configured['activated'] ){
+				add_site_option( 'pt_wp_discourse_sso_activated', TRUE );
+			}
 			return true;
 		} else {
 			return false;

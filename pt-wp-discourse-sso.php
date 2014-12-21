@@ -20,7 +20,7 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 // Set some constants
-define('PT_WP_DISCOURSE_SSO_VERSION', '0.2');
+define('PT_WP_DISCOURSE_SSO_VERSION', '0.2.1');
 define('PT_WP_DISCOURSE_SSO_DIR', plugin_dir_path( __FILE__ ));
 define('PT_WP_DISCOURSE_SSO_URL', plugins_url( '', __FILE__ ));
 /*----------------------------------------------------------------------------*
