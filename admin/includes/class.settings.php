@@ -9,8 +9,8 @@
 
 require_once dirname( __FILE__ ) . '/class.settings-api.php';
 
-if ( !class_exists('if_settings_api_wrap' ) ):
-class if_settings_api_wrap {
+if ( !class_exists('pt_wp_discourse_sso_settings_api_wrap' ) ):
+class pt_wp_discourse_sso_settings_api_wrap {
 
     private $settings_api;
 
@@ -45,7 +45,7 @@ class if_settings_api_wrap {
 	function submenu_page_callback() {
 
 		echo '<div class="wrap">';
-			?><h2><?php _e('PrimeTime WP + Discourse SSO Settings','idea-factory');?></h2><?php
+			?><h2><?php _e('PrimeTime WP + Discourse SSO Settings','pt-wp-discourse-sso');?></h2><?php
 
 			$this->settings_api->show_navigation();
         	$this->settings_api->show_forms();
@@ -132,7 +132,7 @@ class if_settings_api_wrap {
 }
 endif;
 
-$settings = new if_settings_api_wrap();
+$settings = new pt_wp_discourse_sso_settings_api_wrap();
 
 
 
