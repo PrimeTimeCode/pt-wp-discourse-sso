@@ -27,11 +27,11 @@ class WP_Discourse_SSO {
 	/**
 	 * Plugin version, used for cache-busting of style and script file references.
 	 *
-	 * @since   0.0.1
+	 * @since   0.1
 	 *
 	 * @var     string
 	 */
-	const VERSION = '0.0.1';
+	const VERSION = '0.1';
 
 	/**
 	 * Unique identifier
@@ -41,7 +41,7 @@ class WP_Discourse_SSO {
 	 * of text. Its value should match the Text Domain file header in the main
 	 * plugin file.
 	 *
-	 * @since    0.0.1
+	 * @since    0.1
 	 *
 	 * @var      string
 	 */
@@ -50,7 +50,7 @@ class WP_Discourse_SSO {
 	/**
 	 * Instance of this class.
 	 *
-	 * @since    0.0.1
+	 * @since    0.1
 	 *
 	 * @var      object
 	 */
@@ -60,7 +60,7 @@ class WP_Discourse_SSO {
 	 * Initialize the plugin by setting localization and loading public scripts
 	 * and styles.
 	 *
-	 * @since     0.0.1
+	 * @since     0.1
 	 */
 	private function __construct() {
 
@@ -113,7 +113,7 @@ class WP_Discourse_SSO {
 	/**
 	 * Return the plugin slug.
 	 *
-	 * @since    0.0.1
+	 * @since    0.1
 	 *
 	 * @return    Plugin slug variable.
 	 */
@@ -124,7 +124,7 @@ class WP_Discourse_SSO {
 	/**
 	 * Return an instance of this class.
 	 *
-	 * @since     0.0.1
+	 * @since     0.1
 	 *
 	 * @return    object    A single instance of this class.
 	 */
@@ -141,7 +141,7 @@ class WP_Discourse_SSO {
 	/**
 	 * Fired when the plugin is activated.
 	 *
-	 * @since    0.0.1
+	 * @since    0.1
 	 *
 	 * @param    boolean    $network_wide    True if WPMU superadmin uses
 	 *                                       "Network Activate" action, false if
@@ -178,7 +178,7 @@ class WP_Discourse_SSO {
 	/**
 	 * Fired when the plugin is deactivated.
 	 *
-	 * @since    0.0.1
+	 * @since    0.1
 	 *
 	 * @param    boolean    $network_wide    True if WPMU superadmin uses
 	 *                                       "Network Deactivate" action, false if
@@ -216,7 +216,7 @@ class WP_Discourse_SSO {
 	/**
 	 * Fired when a new site is activated with a WPMU environment.
 	 *
-	 * @since    0.0.1
+	 * @since    0.1
 	 *
 	 * @param    int    $blog_id    ID of the new blog.
 	 */
@@ -238,7 +238,7 @@ class WP_Discourse_SSO {
 	 * - not spam
 	 * - not deleted
 	 *
-	 * @since    0.0.1
+	 * @since    0.1
 	 *
 	 * @return   array|false    The blog ids, false if no matches.
 	 */
@@ -258,7 +258,7 @@ class WP_Discourse_SSO {
 	/**
 	 * Fired for each blog when the plugin is activated.
 	 *
-	 * @since    0.0.1
+	 * @since    0.1
 	 */
 	private static function single_activate() {
 		// @TODO: Define activation functionality here
@@ -267,7 +267,7 @@ class WP_Discourse_SSO {
 	/**
 	 * Fired for each blog when the plugin is deactivated.
 	 *
-	 * @since    0.0.1
+	 * @since    0.1
 	 */
 	private static function single_deactivate() {
 		// @TODO: Define deactivation functionality here

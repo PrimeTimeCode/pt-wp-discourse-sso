@@ -14,7 +14,7 @@ class WP_Discourse_SSO_Admin {
 	/**
 	 * Instance of this class.
 	 *
-	 * @since    0.0.1
+	 * @since    0.1
 	 *
 	 * @var      object
 	 */
@@ -23,7 +23,7 @@ class WP_Discourse_SSO_Admin {
 	/**
 	 * Slug of the plugin screen.
 	 *
-	 * @since    0.0.1
+	 * @since    0.1
 	 *
 	 * @var      string
 	 */
@@ -33,7 +33,7 @@ class WP_Discourse_SSO_Admin {
 	 * Initialize the plugin by loading admin scripts & styles and adding a
 	 * settings page and menu.
 	 *
-	 * @since     0.0.1
+	 * @since     0.1
 	 */
 	private function __construct() {
 
@@ -47,7 +47,7 @@ class WP_Discourse_SSO_Admin {
 	/**
 	 * Return an instance of this class.
 	 *
-	 * @since     0.0.1
+	 * @since     0.1
 	 *
 	 * @return    object    A single instance of this class.
 	 */
