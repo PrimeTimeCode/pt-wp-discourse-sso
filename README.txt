@@ -3,7 +3,7 @@ Contributors: etcio, nphaskins
 Tags: discourse, forum, sso
 Requires at least: 3.6
 Tested up to: 3.6
-Stable tag: 0.2
+Stable tag: 0.2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -76,6 +76,10 @@ https://discourse.org
 * SSO methods adapted from ArmedGuy : https://github.com/ArmedGuy/discourse_sso_php
 
 == Changelog ==
+
+= 0.2.1 =
+* More user friendly configuration
+* Fields a bit more forgiving
 
 = 0.2 =
 * Refactoring away from template based system

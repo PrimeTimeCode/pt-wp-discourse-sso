@@ -10,7 +10,7 @@
  * Plugin Name:       PrimeTime WP Discourse SSO
  * Plugin URI:        http://etc.io
  * Description:       Single Sign on between WordPress and Discourse
- * Version:           0.2
+ * Version:           0.2.1
  * GitHub Plugin URI: https://github.com/PrimeTimeCode/pt-wp-discourse-sso
  */
 
