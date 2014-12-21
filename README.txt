@@ -53,7 +53,10 @@ Under settings, you'll see the SSO configuration page. Add the url to your Disco
 
 = 3. Enabling SSO on Discourse =
 
-In your Discourse admin settings, find the settings labeled, enable_sso, sso_url and sso_secret. Enter the URL of the page you created, as well as the secret key, and enable sso.
+In your Discourse admin settings, find the settings labeled, enable_sso, sso_url and sso_secret. Enter the URL of your WP installation, as well as the secret key, and enable sso.
+
+More information about these settings can be found here:
+https://meta.discourse.org/t/official-single-sign-on-for-discourse/13045
 
 That's it!
 
