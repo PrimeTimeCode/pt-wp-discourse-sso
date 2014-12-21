@@ -67,8 +67,8 @@ class WP_Discourse_SSO {
 		// Activate plugin when new blog is added
 		add_action( 'wpmu_new_blog', array( $this, 'activate_new_site' ) );
 
-		require_once(PT_WP_DISCOURSE_SSO_DIR.'/public/includes/helpers.php');
-		require_once(PT_WP_DISCOURSE_SSO_DIR.'/public/includes/template-loader.php');
+		require_once(PT_WP_DISCOURSE_SSO_DIR.'public/includes/helpers.php');
+		require_once(PT_WP_DISCOURSE_SSO_DIR.'public/includes/template-loader.php');
 
 		$this->check_configuration();
 

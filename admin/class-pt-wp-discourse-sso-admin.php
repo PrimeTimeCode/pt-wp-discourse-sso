@@ -40,7 +40,7 @@ class WP_Discourse_SSO_Admin {
 		$plugin = WP_Discourse_SSO::get_instance();
 		$this->plugin_slug = $plugin->get_plugin_slug();
 
-		require_once(PT_WP_DISCOURSE_SSO_DIR.'/admin/includes/class.settings.php');
+		require_once(PT_WP_DISCOURSE_SSO_DIR.'admin/includes/class.settings.php');
 
 	}
 

@@ -26,7 +26,7 @@ define('PT_WP_DISCOURSE_SSO_URL', plugins_url( '', __FILE__ ));
 /*----------------------------------------------------------------------------*
  * Public-Facing Functionality
  *----------------------------------------------------------------------------*/
-require_once( plugin_dir_path( __FILE__ ) . 'public/class-pt-wp-discourse-sso.php' );
+require_once( PT_WP_DISCOURSE_SSO_DIR . 'public/class-pt-wp-discourse-sso.php' );
 
 /*
  * Register hooks that are fired when the plugin is activated or deactivated.
