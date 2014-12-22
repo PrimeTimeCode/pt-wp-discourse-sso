@@ -10,7 +10,7 @@
  * Plugin Name:       PrimeTime WP Discourse SSO
  * Plugin URI:        http://etc.io
  * Description:       Single Sign on between WordPress and Discourse
- * Version:           0.2.1
+ * Version:           0.2.2
  * GitHub Plugin URI: https://github.com/PrimeTimeCode/pt-wp-discourse-sso
  */
 
@@ -20,7 +20,7 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 // Set some constants
-define('PT_WP_DISCOURSE_SSO_VERSION', '0.2.1');
+define('PT_WP_DISCOURSE_SSO_VERSION', '0.2.2');
 define('PT_WP_DISCOURSE_SSO_DIR', plugin_dir_path( __FILE__ ));
 define('PT_WP_DISCOURSE_SSO_URL', plugins_url( '', __FILE__ ));
 /*----------------------------------------------------------------------------*

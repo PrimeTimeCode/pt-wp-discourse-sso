@@ -103,22 +103,24 @@ class WP_Discourse_SSO {
 		}
 
 		if ( ! $this->configured['all'] ) {
-			add_action( 'admin_notices', function() {
-    		?>
-		    <div class="error">
-					<h4>Setting up your WP + Discourse SSO connection is easy!</h4>
-					<p>
-					<ol>
-						<li><?php echo ($this->configured['secret'] ? '<s>' : ''); ?>Generate or come up with a random string of characters to use as a "key." Enter it in the <a href="<?php echo $this->admin_url; ?>">settings page</a>.<?php echo ($this->configured['secret'] ? '</s>' : ''); ?></li>
-						<li><?php echo ($this->configured['discourse_url'] ? '<s>' : ''); ?>Paste your Discourse URL (http://example.discourse.org) into <a href="<?php echo $this->admin_url; ?>">settings page</a>.<?php echo ($this->configured['discourse_url'] ? '</s>' : ''); ?></li>
-						<li><?php echo ($this->configured['activated'] ? '<s>' : ''); ?>Handle your first authentication. <i>(This message will go away once you'd validated your first SSO request)</i><?php echo ($this->configured['activated'] ? '</s>' : ''); ?></li>
-					</ol>
-					</p>
-		    </div>
-		    <?php
-			});
+			add_action( 'admin_notices', array( $this, 'render_admin_notice' ) );
 		}
 
+	}
+
+	public function render_admin_notice() {
+		?>
+    <div class="error">
+			<h4>Setting up your WP + Discourse SSO connection is easy!</h4>
+			<p>
+			<ol>
+				<li><?php echo ($this->configured['secret'] ? '<s>' : ''); ?>Generate or come up with a random string of characters to use as a "key." Enter it in the <a href="<?php echo $this->admin_url; ?>">settings page</a>.<?php echo ($this->configured['secret'] ? '</s>' : ''); ?></li>
+				<li><?php echo ($this->configured['discourse_url'] ? '<s>' : ''); ?>Paste your Discourse URL (http://example.discourse.org) into <a href="<?php echo $this->admin_url; ?>">settings page</a>.<?php echo ($this->configured['discourse_url'] ? '</s>' : ''); ?></li>
+				<li><?php echo ($this->configured['activated'] ? '<s>' : ''); ?>Handle your first authentication. <i>(This message will go away once you'd validated your first SSO request)</i><?php echo ($this->configured['activated'] ? '</s>' : ''); ?></li>
+			</ol>
+			</p>
+    </div>
+    <?php
 	}
 
 	/**
