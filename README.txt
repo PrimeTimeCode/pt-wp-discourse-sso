@@ -2,8 +2,8 @@
 Contributors: etcio, nphaskins
 Tags: discourse, forum, sso
 Requires at least: 3.6
-Tested up to: 3.6
-Stable tag: 0.2.2
+Tested up to: 4.1
+Stable tag: 0.2.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -15,7 +15,7 @@ Discourse is a fantastic new forum that can add another layer to your WordPress 
 
 Notes:
 
-*   This plugin requires permalinks to be enabled.
+*   The Discourse option "Staff must approve all new user accounts before they are allowed to access the site." needs to be disabled for this to work properly.
 
 Some Features:
 
@@ -64,8 +64,8 @@ That's it!
 
 = Where can I get a Discourse forum? =
 
-https://www.discoursehosting.com/
-https://discourse.org
+* https://discourse.org
+* https://www.discoursehosting.com/
 
 == Screenshots ==
 
@@ -79,6 +79,10 @@ https://discourse.org
 * SSO methods adapted from ArmedGuy : https://github.com/ArmedGuy/discourse_sso_php
 
 == Changelog ==
+
+= 0.2.3 =
+* Send avatars to discourse (Thanks @pjv https://github.com/PrimeTimeCode/pt-wp-discourse-sso/pull/1)
+* Additional sanitization (Thanks @pratyushmittal https://github.com/PrimeTimeCode/pt-wp-discourse-sso/pull/2)
 
 = 0.2.2 =
 * Better compatibility with PHP 5.2
