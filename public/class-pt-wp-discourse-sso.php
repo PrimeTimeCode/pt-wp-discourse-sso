@@ -375,7 +375,7 @@ class WP_Discourse_SSO {
 				$redirect = $this->cleansePayload( $redirect );
 
 				// Build login URL
-				$login = wp_login_url( $redirect );
+                $login = wp_login_url( esc_url_raw( $redirect ) );
 
 				// Redirect to login
 				wp_redirect( $login );
