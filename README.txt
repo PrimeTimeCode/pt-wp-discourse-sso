@@ -1,9 +1,9 @@
 === PrimeTime WordPress + Discourse SSO ===
-Contributors: etcio, nphaskins, dphrag
+Contributors: etcio, nphaskins
 Tags: discourse, forum, sso
 Requires at least: 3.6
-Tested up to: 4.3.1
-Stable tag: 0.2.4
+Tested up to: 4.1
+Stable tag: 0.2.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -21,7 +21,6 @@ Some Features:
 
 *   Seamless integration into almost any WordPress installation.
 *   Get setup within minutes through 3 easy steps. Anyone can do it.
-*   Additional integration with MemberMouse.
 
 Coming Soon:
 
@@ -80,10 +79,6 @@ That's it!
 * SSO methods adapted from ArmedGuy : https://github.com/ArmedGuy/discourse_sso_php
 
 == Changelog ==
-
-= 0.2.4 =
-* Added basic support for MemberMouse
-* Added option to synchronize logouts, if user logging out from WP site.
 
 = 0.2.3 =
 * Send avatars to discourse (Thanks @pjv https://github.com/PrimeTimeCode/pt-wp-discourse-sso/pull/1)
